@@ -95,8 +95,8 @@ namespace CrudSQLServer
                 comando.Connection = conexao;
 
                 int id = new Random(DateTime.Now.Millisecond).Next(0, 1000);
-                string nome = lbNome.Text;
-                string email = lbEmail.Text;
+                string nome = txtNome.Text;
+                string email = txtEmail.Text;
 
                 comando.CommandText = "insert into pessoas values (" + id + ", '" + nome + "','" + email + "')";
                 comando.ExecuteNonQuery();
@@ -109,6 +109,48 @@ namespace CrudSQLServer
             }
             catch (Exception obj)
             {
+                lbResultado.Text = obj.Message;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        private void btnProcurar_Click(object sender, EventArgs e)
+        {
+            dtLista.Rows.Clear();
+
+            string baseDados = Application.StartupPath + @"\db\DBSQLServer.sfd";
+            string strConexao = @"DataSource = " + baseDados + "; Password = '123456'";
+
+            SqlCeConnection conexao = new SqlCeConnection(strConexao);
+
+            try
+            {
+                string query = "select * from pessoas";
+
+                if(txtNome.Text != "")
+                {
+                    query = "select * from pessoas where nome like '" + txtNome.Text + "'";
+                }
+
+                DataTable dados = new DataTable();
+
+                SqlCeDataAdapter adaptador = new SqlCeDataAdapter(query, strConexao);
+
+                conexao.Open();
+
+                adaptador.Fill(dados);   
+                
+                foreach (DataRow linha in dados.Rows)
+                {
+                    dtLista.Rows.Add(linha.ItemArray);
+                }
+            }
+            catch (Exception obj)
+            {
+                dtLista.Rows.Clear();
                 lbResultado.Text = obj.Message;
             }
             finally

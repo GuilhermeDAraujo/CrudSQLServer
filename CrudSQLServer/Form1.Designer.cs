@@ -163,6 +163,7 @@
             this.btnProcurar.TabIndex = 9;
             this.btnProcurar.Text = "procurar";
             this.btnProcurar.UseVisualStyleBackColor = true;
+            this.btnProcurar.Click += new System.EventHandler(this.btnProcurar_Click);
             // 
             // btnExcluir
             // 

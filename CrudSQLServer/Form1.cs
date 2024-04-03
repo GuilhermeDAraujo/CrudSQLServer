@@ -79,5 +79,42 @@ namespace CrudSQLServer
                 conexao.Close();
             }
         }
+
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+            string baseDados = Application.StartupPath + @"\db\DBSQLServer.sfd";
+            string strConexao = @"DataSource = " + baseDados + "; Password = '123456'";
+
+            SqlCeConnection conexao = new SqlCeConnection(strConexao);
+
+            try
+            {
+                conexao.Open();
+
+                SqlCeCommand comando = new SqlCeCommand();
+                comando.Connection = conexao;
+
+                int id = new Random(DateTime.Now.Millisecond).Next(0, 1000);
+                string nome = lbNome.Text;
+                string email = lbEmail.Text;
+
+                comando.CommandText = "insert into pessoas values (" + id + ", '" + nome + "','" + email + "')";
+                comando.ExecuteNonQuery();
+
+                lbResultado.Text = "Dados inseridos com sucesso";
+                comando.Dispose();
+
+                txtNome.Text = "";
+                txtEmail.Text = "";
+            }
+            catch (Exception obj)
+            {
+                lbResultado.Text = obj.Message;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
     }
 }

@@ -152,6 +152,7 @@
             this.btnInserir.TabIndex = 8;
             this.btnInserir.Text = "inserir";
             this.btnInserir.UseVisualStyleBackColor = true;
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // btnProcurar
             // 
@@ -202,7 +203,7 @@
             this.Controls.Add(this.lbResultado);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "CRUD - SQL SERVER";
             ((System.ComponentModel.ISupportInitialize)(this.dtLista)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

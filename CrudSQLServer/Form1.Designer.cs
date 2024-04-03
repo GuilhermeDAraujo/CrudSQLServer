@@ -69,7 +69,7 @@
             this.dtLista.MultiSelect = false;
             this.dtLista.Name = "dtLista";
             this.dtLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtLista.Size = new System.Drawing.Size(532, 285);
+            this.dtLista.Size = new System.Drawing.Size(532, 223);
             this.dtLista.TabIndex = 1;
             // 
             // id
@@ -130,6 +130,7 @@
             this.btnConectar.TabIndex = 6;
             this.btnConectar.Text = "conectar";
             this.btnConectar.UseVisualStyleBackColor = true;
+            this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
             // 
             // btnCriarTabela
             // 
@@ -138,8 +139,9 @@
             this.btnCriarTabela.Name = "btnCriarTabela";
             this.btnCriarTabela.Size = new System.Drawing.Size(142, 45);
             this.btnCriarTabela.TabIndex = 7;
-            this.btnCriarTabela.Text = "criar tabela";
+            this.btnCriarTabela.Text = "criar tabela pessoas";
             this.btnCriarTabela.UseVisualStyleBackColor = true;
+            this.btnCriarTabela.Click += new System.EventHandler(this.btnCriarTabela_Click);
             // 
             // btnInserir
             // 
@@ -185,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 520);
+            this.ClientSize = new System.Drawing.Size(706, 457);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnProcurar);

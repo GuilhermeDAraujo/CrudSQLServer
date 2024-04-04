@@ -158,5 +158,39 @@ namespace CrudSQLServer
                 conexao.Close();
             }
         }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            string baseDados = Application.StartupPath + @"\db\DBSQLServer.sfd";
+            string strConexao = @"DataSource = " + baseDados + "; Password = '123456'";
+
+            SqlCeConnection conexao = new SqlCeConnection(strConexao);
+
+            try
+            {
+                conexao.Open();
+
+                SqlCeCommand comando = new SqlCeCommand();
+                comando.Connection = conexao;
+
+                int id = (int)dtLista.SelectedRows[0].Cells[0].Value;
+                comando.CommandText = "delete from pessoas where id = '" + id + "' ";
+                comando.ExecuteNonQuery();
+
+                lbResultado.Text = "Dados excluídos com sucesso";
+                comando.Dispose();
+
+                txtNome.Text = "";
+                txtEmail.Text = "";
+            }
+            catch (Exception obj)
+            {
+                lbResultado.Text = obj.Message;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
     }
 }

@@ -192,5 +192,40 @@ namespace CrudSQLServer
                 conexao.Close();
             }
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            string baseDados = Application.StartupPath + @"\db\DBSQLServer.sfd";
+            string strConexao = @"DataSource = " + baseDados + "; Password = '123456'";
+
+            SqlCeConnection conexao = new SqlCeConnection(strConexao);
+
+            try
+            {
+                conexao.Open();
+
+                SqlCeCommand comando = new SqlCeCommand();
+                comando.Connection = conexao;
+
+                int id = (int)dtLista.SelectedRows[0].Cells[0].Value;
+
+                comando.CommandText = "update pessoas set nome = '" + txtNome.Text + "', email = '" + txtEmail.Text + "' where id like '" + id + "'";
+                comando.ExecuteNonQuery();
+
+                lbResultado.Text = "Dados editados com sucesso";
+                comando.Dispose();
+
+                txtNome.Text = "";
+                txtEmail.Text = "";
+            }
+            catch (Exception obj)
+            {
+                lbResultado.Text = obj.Message;
+            }
+            finally
+            {
+                conexao.Close();
+            } 
+        }
     }
 }
